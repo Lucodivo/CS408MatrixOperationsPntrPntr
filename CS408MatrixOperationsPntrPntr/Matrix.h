@@ -16,4 +16,7 @@ void multMat(Matrix x, Matrix y, Matrix Z);
 void zeroInitMat(Matrix &x);
 void deleteMat(Matrix &x);
 
-void printMat(Matrix x);
+// helper functions for user of Matrix struct
+bool sameDimensions(const Matrix &m1, const Matrix &m2);
+bool sameInnerDimensions(const Matrix &m1, const Matrix &m2);
+void printMat(const Matrix &x);

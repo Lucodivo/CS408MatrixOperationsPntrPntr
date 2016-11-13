@@ -50,26 +50,41 @@ int main() {
         switch (choice)
         {
         case '1':
-            addMat(m1, m2, m3);
+            if (sameDimensions(m1,m2)) {
+                addMat(m1, m2, m3);
 
-            std::cout << "(1) M4 = M1 + M2 \n";
-            printResults(m1, m2, m3);
+                std::cout << "(1) M4 = M1 + M2 \n";
+                printResults(m1, m2, m3);
+            }
+            else {
+                std::cout << "Matrices do not have the same dimensions \n";
+            }
             break;
         case '2':
-            subMat(m1, m2, m3);
+            if (sameDimensions(m1, m2)) {
+                subMat(m1, m2, m3);
 
-            std::cout << "(2) M4 = M1 - M2 \n";
-            printResults(m1, m2, m3);
+                std::cout << "(2) M4 = M1 - M2 \n";
+                printResults(m1, m2, m3);
+            }
+            else {
+                std::cout << "Matrices do not have the same dimensions \n";
+            }
             break;
         case '3':
-            multMat(m1, m2, m3);
+            if (sameInnerDimensions(m1, m2)) {
+                multMat(m1, m2, m3);
 
-            std::cout << "(3) M5 = M1 * M2 \n";
-            printResults(m1, m2, m3);
+                std::cout << "(3) M5 = M1 * M2 \n";
+                printResults(m1, m2, m3);
+            }
+            else {
+                std::cout << "Matrices do not have the same inner dimensions \n";
+            }
             break;
         case '4':
             getMatricesFromUser(m1, m2);
-            // deallocate all memore
+            // deallocate all memory
             deleteMat(m3);
             // adjust the size of the array appropriately
             m3.numRows = m1.numRows;

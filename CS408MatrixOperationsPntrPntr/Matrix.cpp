@@ -49,7 +49,7 @@ void multMat(Matrix x, Matrix y, Matrix z) {
 
 /**
  * @fn  deleting allocated memory from Matrix
- * @param [in,out]  X   
+ * @param   [in,out]X   
  */
 void deleteMat(Matrix &x) {
     for (int i = 0; i < x.numRows; i++) {
@@ -60,8 +60,30 @@ void deleteMat(Matrix &x) {
 }
 
 /**
+ * @brief   Returns true if the matrices have the same dimensions, used for add/sub
+ * @param   m1  
+ * @param   m2  
+ * @return  
+ */
+bool sameDimensions(const Matrix & m1, const Matrix & m2)
+{
+    return (m1.numRows == m2.numRows && m1.numCols == m2.numCols);
+}
+
+/**
+ * @brief   Returns true if the matrices have the same inner dimensions, used for mult
+ * @param   m1  
+ * @param   m2  
+ * @return  
+ */
+bool sameInnerDimensions(const Matrix & m1, const Matrix & m2)
+{
+    return  (m1.numCols == m2.numRows);
+}
+
+/**
  * @brief   Initialize the matrix to zero
- * @param [in,out]  X   Matrix to be initialized
+ * @param   [in,out]X   Matrix to be initialized
  */
 void zeroInitMat(Matrix &x) {
     x.ptrPtr = new double *[x.numRows];
@@ -77,7 +99,7 @@ void zeroInitMat(Matrix &x) {
 * @brief    Prints a matrix to console
 * @param    X
 */
-void printMat(Matrix x) {
+void printMat(const Matrix &x) {
     for (int i = 0; i < x.numRows; i++) {
         for (int j = 0; j < x.numCols; j++) {
             std::cout << x.ptrPtr[i][j] << "\t";
