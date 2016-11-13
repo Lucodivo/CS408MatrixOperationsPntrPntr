@@ -12,6 +12,7 @@ void addMat(Matrix x, Matrix y, Matrix z);
 void subMat(Matrix x, Matrix y, Matrix z);
 void multMat(Matrix x, Matrix y, Matrix Z);
 
+// allocation/deallocation functions
 void zeroInitMat(Matrix &x);
 void deleteMat(Matrix &x);
 

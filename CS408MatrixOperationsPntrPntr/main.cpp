@@ -4,17 +4,16 @@
 void printCommands();
 void printTwoMatrices(Matrix m1, Matrix m2);
 void printResults(Matrix m1, Matrix m2, Matrix m3);
-void getMatrices(Matrix &m1, Matrix &m2); 
-void getMatrix(Matrix &m);
+void getMatricesFromUser(Matrix &m1, Matrix &m2); 
+void getMatrixFromUser(Matrix &m);
 
 /**
 * @brief    Performs 2D array matrix operations and displays their results
-*           (commented out macros can be substituted for the function calls)
 * @author   Connor A. Haskins
 * @date	11/11/2016
 */
 int main() {
-    // dimension constants defined in Matrix.h
+    // create and fill two matrices
     Matrix m1;
     m1.numCols = 5;
     m1.numRows = 5;
@@ -38,12 +37,7 @@ int main() {
     Matrix m3;
     m3.numCols = m2.numCols;
     m3.numRows = m1.numRows;
-    m3.ptrPtr = new double * [m3.numRows];
-    m3.ptrPtr[0] = new double [m3.numCols];
-    m3.ptrPtr[1] = new double [m3.numCols];
-    m3.ptrPtr[2] = new double [m3.numCols];
-    m3.ptrPtr[3] = new double [m3.numCols];
-    m3.ptrPtr[4] = new double [m3.numCols];
+    zeroInitMat(m3);
 
     printTwoMatrices(m1, m2);
     printCommands();
@@ -74,11 +68,15 @@ int main() {
             printResults(m1, m2, m3);
             break;
         case '4':
-            getMatrices(m1, m2);
+            getMatricesFromUser(m1, m2);
+            // deallocate all memore
             deleteMat(m3);
+            // adjust the size of the array appropriately
             m3.numRows = m1.numRows;
             m3.numCols = m2.numCols;
+            // initiailze the values in the new array to zero
             zeroInitMat(m3);
+            // print the new matrices
             printTwoMatrices(m1, m2);
             break;
         default:
@@ -96,7 +94,7 @@ int main() {
  * @param   m1  To store the first Matrix
  * @param   m2  To store the second Matrix
  */
-void getMatrices(Matrix &m1, Matrix &m2) {
+void getMatricesFromUser(Matrix &m1, Matrix &m2) {
     deleteMat(m1);
 
     std::cout << "You are now replacing the first matrix... \n";
@@ -105,7 +103,7 @@ void getMatrices(Matrix &m1, Matrix &m2) {
     std::cout << "How many columns in the second matrix? \n";
     std::cin >> m1.numCols;
 
-    getMatrix(m1);
+    getMatrixFromUser(m1);
 
     deleteMat(m2);
 
@@ -115,14 +113,14 @@ void getMatrices(Matrix &m1, Matrix &m2) {
     std::cout << "How many columns in the second matrix? \n";
     std::cin >> m2.numCols;
 
-    getMatrix(m2);
+    getMatrixFromUser(m2);
 }
 
 /**
  * @brief   Gets a matrix from user input
  * @param [in,out]  m   Where to store the Matrix
  */
-void getMatrix(Matrix &m) {
+void getMatrixFromUser(Matrix &m) {
     m.ptrPtr = new double * [m.numRows];
     for (int i = 0; i < m.numRows; i++) {
         m.ptrPtr[i] = new double[m.numCols];
